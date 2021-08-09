@@ -1,0 +1,16 @@
+#!/bin/bash
+. $(dirname $0)/aux-funcs
+
+
+ifconfig wlan0 up
+
+while [ 1 ]
+do
+        echo "\r\n/---------------------------------------------------/"
+        let "x+=1"
+        echo "RE Loop time is: $x"
+#	gpio set 9; pwm 1 A 0.1 4000
+	./auto_eth0 && { leds 0 on; sleep 0.2; leds 0 off; }
+#	iw dev wlan0 scan | grep SSID
+done
+

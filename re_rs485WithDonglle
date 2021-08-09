@@ -1,0 +1,13 @@
+#!/bin/bash
+. $(dirname $0)/aux-funcs
+
+
+#stty -F /dev/ttyUSB2  115200
+
+x=1
+while [ 1 ]
+do
+	python rs485_dongle.py && { leds 1 on; sleep 0.2; leds 1 off; }
+
+done
+

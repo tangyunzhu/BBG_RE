@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+while [ 1 ]
+do
+	can_pairs can0,can1 && { leds 0 on; sleep 0.2; leds 0 off; }
+	sleep 0.1
+done

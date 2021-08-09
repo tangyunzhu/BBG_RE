@@ -1,0 +1,7 @@
+#!/bin/bash
+
+while [ 1 ]
+do
+	python rs485.py && { leds 1 on; sleep 0.2; leds 1 off; }
+	sleep 0.1
+done

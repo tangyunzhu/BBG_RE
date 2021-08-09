@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#mount /dev/sda1 /mnt/
+#cd /mnt/
+while [ 1 ]
+do
+	mount /dev/sda1 /mnt/
+	r=$?
+	if [ $r -eq 0 ]; then
+		cd /mnt/
+		dd if=/dev/zero of=usb_test bs=1M count=10 && { leds 1 on; sleep 0.5; leds 1 off; }
+		cd /root/
+		umount /dev/sda1
+	fi
+	sleep 0.1
+done

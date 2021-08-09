@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#mount /dev/mmcblk0p1 /media/
+#cd /media/
+while [ 1 ]
+do
+	mount /dev/mmcblk0p1 /media/
+	r=$?
+	if [ $r -eq 0 ]; then
+		cd /media/
+		dd if=/dev/zero of=tf_test bs=1M count=10 && { leds 2 on; sleep 0.5; leds 2 off; }
+		cd /root/
+		umount /dev/mmcblk0p1
+	fi
+	sleep 0.5
+done

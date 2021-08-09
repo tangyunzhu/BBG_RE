@@ -1,0 +1,11 @@
+#!/bin/bash
+
+sleep 20
+while [ 1 ]
+do
+	echo "ATD13556722917;" > /dev/ttyUSB2
+	sleep 20
+	echo "ATH" > /dev/ttyUSB2
+	echo "ATH" > /dev/ttyUSB2
+	sleep 5
+done

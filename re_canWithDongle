@@ -1,0 +1,32 @@
+#!/bin/bash
+
+ip link set can0 down
+#ip link set can1 down
+ip link set can0 type can bitrate 500000 # 500Kbps
+#ip link set can1 type can bitrate 500000 # 500Kbps
+ip link set can0 up
+#ip link set can1 up
+
+
+
+while [ 1 ]
+do
+        echo "\r\n/---------------------------------------------------/"
+        let "x+=1"
+        echo "RE Loop time is: $x"
+
+	f=$(mktemp)
+	candump can0 > $f &
+	sleep 0.5
+	
+	cansend can0 111#3836343237353331
+	sleep 0.5
+	v=$(cat $f)
+	kill -9 $!
+	wait
+	echo "Recv '$v'" >&2
+	rm -f $f
+	f=$(expr index "$v" "111   [8]  38 36 34 32 37 35 33 31")
+	[ "$f" -ne 0 ] && { leds 0 on; sleep 0.4; leds 0 off; } 
+	sleep 0.1
+done
